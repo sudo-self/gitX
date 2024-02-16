@@ -1,32 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; // Import ReactDOM
 import { useAuth0, Auth0Provider } from '@auth0/auth0-react';
-import './App.css';
-import { kv } from '@vercel/kv';
+import './App.css'; // Import index.css file
 
-const App = () => {
+function App() {
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const [username, setUsername] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [following, setFollowing] = useState([]);
   const [showRepoList, setShowRepoList] = useState(true);
-  const [selectedRepoURL, setSelectedRepoURL] = useState('');
-  const [views, setViews] = useState(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch count value from KV storage
-        const views = await kv.get('views');
-        setViews(parseInt(views) || 0);
-      } catch (error) {
-        console.error('Error fetching count:', error);
-      }
-    };
-
-    fetchData();
-  }, []); // Empty dependency array means this effect runs once after the initial render
 
   useEffect(() => {
     const fetchFollowing = async () => {
@@ -84,12 +67,14 @@ const App = () => {
 
   const handleBackButtonClick = () => {
     setShowRepoList(true);
-    setSelectedRepoURL('');
   };
 
   const handleRepoClick = (repoName) => {
     setShowRepoList(false);
-    setSelectedRepoURL(`https://${username}.github.io/${repoName}`);
+  };
+
+  const constructGitHubPagesURL = (username, repoName) => {
+    return `https://${username}.github.io/${repoName}`;
   };
 
   return (
@@ -105,7 +90,7 @@ const App = () => {
       )}
       {showRepoList ? (
         <div>
-          <h1>git 🔍 Xplor&nbsp;{views}</h1>
+          <h1>git 🔍 Xplore</h1>
           <p>view websites deployed with github pages</p>
           <form onSubmit={handleSubmit}>
             <input type="text" value={username} onChange={handleInputChange} placeholder="enter username" />
@@ -115,7 +100,8 @@ const App = () => {
           <ul>
             {repositories.map(repo => (
               <li key={repo.id} onClick={() => handleRepoClick(repo.name)}>
-                {repo.name} - <a href={`https://${username}.github.io/${repo.name}`} target="_blank" rel="noopener noreferrer">View Page</a>
+                {repo.name}
+                <a href={constructGitHubPagesURL(username, repo.name)} target="_blank" rel="noopener noreferrer">View Page</a>
               </li>
             ))}
           </ul>
@@ -123,9 +109,6 @@ const App = () => {
       ) : (
         <div>
           <button onClick={handleBackButtonClick}>Back</button>
-          {selectedRepoURL && (
-            <iframe title="GitHub Pages" src={selectedRepoURL} width="100%" height="500px"></iframe>
-          )}
         </div>
       )}
       <h2>Follow_</h2>
@@ -134,11 +117,10 @@ const App = () => {
           <li key={user.id}>{user.login}</li>
         ))}
       </ul>
-      <footer>JR&nbsp;&#10084; Auth0 React Vercel kv&nbsp;&copy;2024</footer>
-
+      <footer>ghAPI | 0auth | React | Vercel | gitXplore</footer>
     </div>
   );
-};
+}
 
 ReactDOM.render(
   <React.StrictMode>
