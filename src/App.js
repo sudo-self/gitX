@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom'; // Import ReactDOM
 import { useAuth0, Auth0Provider } from '@auth0/auth0-react';
+import './App.css'; // Import index.css file
+
 function App() {
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const [username, setUsername] = useState('');
@@ -30,13 +32,17 @@ function App() {
     }
   }, [username]);
 
-  const handleInputChange = (event) => {
-    setUsername(event.target.value);
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const delayedFetchRepos = debounce(async () => {
     try {
       const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=50`);
       const reposData = await reposResponse.json();
@@ -47,6 +53,16 @@ function App() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
+  }, 500); // Adjust debounce delay as needed
+
+  const handleInputChange = (event) => {
+    setUsername(event.target.value);
+    delayedFetchRepos();
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    delayedFetchRepos();
   };
 
   const handleBackButtonClick = () => {
