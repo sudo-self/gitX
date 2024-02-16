@@ -29,6 +29,19 @@ const App = () => {
   }, []); // Empty dependency array means this effect runs once after the initial render
 
   useEffect(() => {
+    const incrementViews = async () => {
+      try {
+        await kv.put('views', (views + 1).toString());
+        setViews(views + 1);
+      } catch (error) {
+        console.error('Error incrementing count:', error);
+      }
+    };
+
+    incrementViews();
+  }, [views]); // Increment view count whenever it changes
+
+  useEffect(() => {
     const fetchFollowing = async () => {
       try {
         const followingResponse = await fetch(`https://api.github.com/users/${username}/following?per_page=50`);
@@ -101,7 +114,7 @@ const App = () => {
       {isAuthenticated ? (
         <button onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
       ) : (
-        <button onClick={loginWithRedirect}>Sign In</button>
+        <button onClick={loginWithRedirect}>Sign in</button>
       )}
       {showRepoList ? (
         <div>
@@ -111,11 +124,11 @@ const App = () => {
             <input type="text" value={username} onChange={handleInputChange} placeholder="enter username" />
             <button type="submit">Search</button>
           </form>
-          <h2>Repos_</h2>
+          <h2>Pages:</h2>
           <ul>
             {repositories.map(repo => (
               <li key={repo.id} onClick={() => handleRepoClick(repo.name)}>
-                {repo.name} - <a href={`https://${username}.github.io/${repo.name}`} target="_blank" rel="noopener noreferrer">View Page</a>
+                {repo.name} - <a className="view-page-link" href={`https://${username}.github.io/${repo.name}`} target="_blank" rel="noopener noreferrer">View Page</a>
               </li>
             ))}
           </ul>
@@ -128,14 +141,13 @@ const App = () => {
           )}
         </div>
       )}
-      <h2>Follow_</h2>
+      <h2>Followers:</h2>
       <ul>
         {following.map(user => (
           <li key={user.id}>{user.login}</li>
         ))}
       </ul>
       <footer>JR&nbsp;&#10084; Auth0 React Vercel kv&nbsp;&copy;2024</footer>
-
     </div>
   );
 };
@@ -154,3 +166,4 @@ ReactDOM.render(
 );
 
 export default App;
+
