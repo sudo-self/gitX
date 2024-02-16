@@ -5,6 +5,11 @@
 ![Screenshot 2024-02-16 at 1 35 25 AM](https://github.com/sudo-self/gitX/assets/119916323/481b5050-9a8d-4570-b92f-f4368c059d99)
 ![Screenshot 2024-02-16 at 12 31 47 AM](https://github.com/sudo-self/gitX/assets/119916323/692d0933-a321-4b3c-bbfa-0bd4205f504d)
 ![Screenshot 2024-02-16 at 12 31 22 AM](https://github.com/sudo-self/gitX/assets/119916323/f05fc968-43c9-4247-a7fb-a1a2e19e74ad)
+![Screenshot 2024-02-16 at 9 46 08 AM](https://github.com/sudo-self/gitX/assets/119916323/777e7f69-80a9-4769-850f-3fd868222670)
+
+
+
+
 ### App.js
 ```
 import React, { useState, useEffect } from 'react';
