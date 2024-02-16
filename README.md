@@ -1,4 +1,6 @@
 ### <a href="https://xplor.sudo-self.com">xplor.sudo-self.com</a>&nbsp;search usernames & view websites built with github pages.
+![Screenshot 2024-02-16 at 9 52 25 AM](https://github.com/sudo-self/gitX/assets/119916323/8490263d-9104-4f5a-852c-e11dd13e5982)
+![Screenshot 2024-02-16 at 9 52 50 AM](https://github.com/sudo-self/gitX/assets/119916323/2e259849-e444-4758-b33d-cf4377596ee0)
 ![Screenshot 2024-02-16 at 2 04 41 AM](https://github.com/sudo-self/gitX/assets/119916323/491d15eb-a065-4dbe-ae58-d04c8d9d3cf8)
 ![Screenshot 2024-02-16 at 9 27 12 AM](https://github.com/sudo-self/gitX/assets/119916323/2fc24d7c-191a-4c06-b448-2368441da3b1)
 ![Screenshot 2024-02-16 at 1 36 16 AM](https://github.com/sudo-self/gitX/assets/119916323/d38d308c-9f51-4366-8e2e-32551ebe6144)
