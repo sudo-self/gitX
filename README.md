@@ -416,3 +416,57 @@ sudo npm install<br>
 sudo npm start<br>
 
 
+
+### App.css
+
+```
+/* Global styles */
+body {
+  background-color: #cfe0f2; /* Set background color of the body */
+  margin: 0; /* Remove default body margin */
+  font-family: Arial, sans-serif; /* Specify a fallback font */
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo {
+  width: 100px; /* Adjust width as needed */
+  height: auto;
+  color: #fff;
+}
+
+/* App container styles */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure the entire viewport height is covered */
+}
+
+/* GitHub link styles */
+.github-link {
+  font-size: 18px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.github-link:hover {
+  text-decoration: underline;
+}
+
+/* Card styles */
+.card {
+  background-color: #ffffff; /* Set background color of the card */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  margin-bottom: 20px; /* Add margin at the bottom */
+}
+```
