@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import logo from './logo.svg'; // Import the default React logo
-
+import logo from './logo.svg';
+import ReactDOM from 'react-dom'; // Import ReactDOM
+import { useAuth0, Auth0Provider } from '@auth0/auth0-react';
 function App() {
+  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const [username, setUsername] = useState('');
   const [repositories, setRepositories] = useState([]);
-  const [following, setFollowing] = useState([]); // Initialize following state as an empty array
+  const [following, setFollowing] = useState([]);
   const [showRepoList, setShowRepoList] = useState(true);
 
   useEffect(() => {
@@ -53,7 +54,6 @@ function App() {
   };
 
   const handleRepoClick = (repoName) => {
-    // Handle clicking on a repository (if needed)
     setShowRepoList(false);
   };
 
@@ -61,18 +61,21 @@ function App() {
     <div className="App">
       <div className="header">
         <img src={logo} alt="React Logo" className="logo" />
-          <a class="github-button" href="https://github.com/sudo-self/gitX" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star sudo-self/gitX on GitHub">Star</a>
-           </div>
+        <a className="github-button" href="https://github.com/sudo-self/gitX" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" aria-label="Star sudo-self/gitX on GitHub">Star</a>
+      </div>
+      {isAuthenticated ? (
+        <button onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
+      ) : (
+        <button onClick={loginWithRedirect}>Sign In</button>
+      )}
       {showRepoList ? (
         <div>
           <h1>git 🔍 Xplore</h1>
-
           <p>view websites deployed with github pages</p>
-  <form onSubmit={handleSubmit}>
-  <input type="text" value={username} onChange={handleInputChange} placeholder="enter username" />
-  <button type="submit">Search</button>
-</form>
-
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={username} onChange={handleInputChange} placeholder="enter username" />
+            <button type="submit">Search</button>
+          </form>
           <h2>Repos_</h2>
           <ul>
             {repositories.map(repo => (
@@ -86,7 +89,6 @@ function App() {
       ) : (
         <div>
           <button onClick={handleBackButtonClick}>Back</button>
-          {/* You can render additional details of the selected repository here */}
         </div>
       )}
       <h2>Follow_</h2>
@@ -99,10 +101,18 @@ function App() {
   );
 }
 
+ReactDOM.render(
+  <React.StrictMode>
+    <Auth0Provider
+      domain="dev-iw1f6w4a3vjsp2mh.us.auth0.com"
+      clientId="kw78etqYlQX0Hq0Wg4oTGWyKIUlJD2eS"
+      redirectUri="https://git-xplore.vercel.app/authorize"
+    >
+      <App />
+    </Auth0Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
 export default App;
-
-
-
-
-
 
