@@ -198,7 +198,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-Logo.svg
+### Logo.svg
 
 ```
 <?xml version="1.0" standalone="no"?>
@@ -412,8 +412,8 @@ m1847 -166 c-119 -107 -338 -248 -410 -263 l-58 -13 70 61 c39 33 77 61 86 61
 </g>
 </svg>
 ```
-sudo npm install<br>
-sudo npm start<br>
+### sudo npm install<br>
+### sudo npm start<br>
 
 
 
