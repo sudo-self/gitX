@@ -73,9 +73,14 @@ function App() {
     setShowRepoList(false);
   };
 
-  const constructGitHubPagesURL = (username, repoName) => {
-    return `https://${username}.github.io/${repoName}`;
-  };
+  function constructGitHubPagesURL(username, repoName) {
+  const baseURL = `https://${username}.github.io/${repoName}`;
+
+  // Check if the URL already ends with ".html" or a trailing slash
+  if (!baseURL.endsWith(".html") && !baseURL.endsWith("/")) {
+    // Append "index.html" to the end of the URL
+    return `${baseURL}/index.html`;
+  }
 
   return (
     <div className="App">
@@ -136,3 +141,17 @@ ReactDOM.render(
 );
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
